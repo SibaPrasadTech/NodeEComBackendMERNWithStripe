@@ -12,14 +12,12 @@ router.post("/register", async (req, res) => {
       process.env.PASS_SEC
     ).toString(),
   });
-
   try {
     const savedUser = await newUser.save();
     res.status(201).json(savedUser);
   } catch (err) {
     res.status(500).json(err);
   }
-
 })
 //LOGIN
 router.post("/login", async (req, res) => {
@@ -36,10 +34,10 @@ router.post("/login", async (req, res) => {
     },
       process.env.JWT_SEC,
       { expiresIn: "3d" });
-    console.log("User : ", user);
+    //console.log("User : ", user);
     const { password, ...userDataWOPassword } = user._doc;
     // console.log("Others : ", others._doc);
-    console.log("User WO Password : ", userDataWOPassword);
+    //console.log("User WO Password : ", userDataWOPassword);
     res.status(200).json({ ...userDataWOPassword, accessToken });
   }
   catch {
